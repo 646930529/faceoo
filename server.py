@@ -1,5 +1,5 @@
 import getface
-import faceoo_gpu as faceoo
+import faceoo as faceoo
 import cv2
 import base64
 import numpy as np
