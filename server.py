@@ -6,7 +6,6 @@ import numpy as np
 import sys
 import gc
 import zcode
-import restart
 
 
 def fs(x):
@@ -188,7 +187,7 @@ def faceooff():
 
 import time
 
-if time.time() > 1609430400:
+if time.time() > 1640966400:
     print('*****************************Authorization has expired, Please contact zqzhou@rincom.net')
 else:
     if len(sys.argv) > 1:
