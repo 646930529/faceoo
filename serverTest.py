@@ -2,11 +2,11 @@ import requests
 import threading
 
 
-urls = ['http://192.168.1.40:5000/faceoobig', ]
+urls = ['http://192.168.1.46:5000/faceoobig', ]
 
 
 def test(index):
-    for i in range(10):
+    for i in range(50):
         url = urls[i % len(urls)]
         headers = {}
         data = {
@@ -17,6 +17,6 @@ def test(index):
         print(index, i, r.text)
 
 
-for i in range(10):
+for i in range(5):
     t1 = threading.Thread(target=test, args=(str(i),))
     t1.start()

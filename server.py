@@ -1,5 +1,5 @@
 import getface
-import faceoo as faceoo
+import faceoo_gpu as faceoo
 import cv2
 import base64
 import numpy as np
@@ -45,12 +45,14 @@ def getfacef():
     if face is None:
         print('face is None')
         data = {
+            'rtn': -1,
             'msg': 'no face'
         }
     else:
         print(face.shape)
         facestr = imgtostr(face)
         data = {
+            'rtn': 0,
             'base64': facestr.decode()
         }
     rtnPath = make_response(json.dumps(data))
@@ -72,6 +74,7 @@ def faceoof():
     print(b.shape)
     s = faceoo.faceoo(a, b)
     data = {
+        'rtn': 0,
         's': float(s),
         'similarity': float(fs(s))
     }
@@ -105,6 +108,7 @@ def faceoobigf():
     if a is not None and b is not None:
         s = faceoo.faceoo(a, b)
         data = {
+            'rtn': 0,
             's': float(s),
             'similarity': float(fs(s))
         }
@@ -126,6 +130,7 @@ def getfaceff():
     f = faceoo.get_f(face)
     f = zcode.encode(f)
     data = {
+        'rtn': 0,
         'f': f
     }
     rtnPath = make_response(json.dumps(data))
@@ -147,6 +152,7 @@ def getbigff():
     if face is None:
         print('face is None')
         data = {
+            'rtn': -1,
             'msg': 'no face'
         }
     else:
@@ -154,6 +160,7 @@ def getbigff():
         f = faceoo.get_f(face)
         f = zcode.encode(f)
         data = {
+            'rtn': 0,
             'f': f
         }
     rtnPath = make_response(json.dumps(data))
@@ -176,6 +183,7 @@ def faceooff():
     b = zcode.decode(b)
     s = np.dot(a, b.T)
     data = {
+        'rtn': 0,
         's': float(s),
         'similarity': float(fs(s))
     }
@@ -187,10 +195,7 @@ def faceooff():
 
 import time
 
-if time.time() > 1640966400:
-    print('*****************************Authorization has expired, Please contact zqzhou@rincom.net')
+if len(sys.argv) > 1:
+    app.run(host="0.0.0.0", debug=False, port=int(sys.argv[1]))
 else:
-    if len(sys.argv) > 1:
-        app.run(host="0.0.0.0", debug=False, port=int(sys.argv[1]))
-    else:
-        app.run(host="0.0.0.0", debug=False, port=5000)
+    app.run(host="0.0.0.0", debug=False, port=5000)
